@@ -20,7 +20,7 @@ useHead({
 useSeoMeta({
   ogImage:
     "https://kalai.fairdataihub.org/api/generate?title=Hello&description=This%20is%20a%20Nuxt%20starter%20template&app=fairdataihub&org=fairdataihub",
-  titleTemplate: "%s - Nuxt Starter Template",
+  titleTemplate: "DMP Chef",
   twitterCard: "summary_large_image",
   twitterImage:
     "https://kalai.fairdataihub.org/api/generate?title=Hello&description=This%20is%20a%20Nuxt%20starter%20template&app=fairdataihub&org=fairdataihub",

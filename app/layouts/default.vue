@@ -16,9 +16,17 @@ const headerItems = computed<NavigationMenuItem[]>(() => [
     active: route.path.startsWith("/app/dashboard"),
   },
   {
-    label: "Changelog",
-    to: "https://github.com/fairdataihub/nuxt-starter/CHANGELOG.md",
+    label: "Draft DMP",
+    to: "/app/dmp",
     target: "_blank",
+  },
+  {
+    label: "Documentation",
+    to: "",
+  },
+  {
+    label: "Contact us",
+    to: "",
   },
 ]);
 

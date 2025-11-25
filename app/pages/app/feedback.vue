@@ -22,7 +22,7 @@ const value = ref('')
     </div>
     <!-- 1a Section -->
     <div class="space-y-2">
-      <p class="text-2xl text-center">
+      <p class="text-xl text-center">
         The file has been downloaded successfully! We welcome any feedback you may have.
       </p>
       <UTextarea :rows="8" autoresize placeholder="Give feedback" class="w-300" v-model="value" />

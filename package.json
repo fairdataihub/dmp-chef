@@ -25,6 +25,7 @@
     "@vueuse/core": "13.4.0",
     "bcrypt": "^5.1.1",
     "date-fns": "^4.1.0",
+    "file-saver": "^2.0.5",
     "marked": "^15.0.7",
     "nodemailer": "^6.10.0",
     "sanitize-html": "^2.14.0"

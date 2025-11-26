@@ -79,23 +79,86 @@ async function generateDMP() {
     dataSource: dataSource.value,
     humanSubjects: humanSubjects.value,
     dataSharing: dataSharing.value,
-    dataVolume: dataVolume.value
-  }
+    dataVolume: dataVolume.value,
+  };
 
   try {
-    const res = await $fetch('/api/query', {
-      method: 'POST',
-      body: payload
-    })
+    // ======= Hardcoded response for frontend testing =======
+    const mockRes = {
+      data: {
+        llama3: {
+          "Element 1: Data Type": {
+            "1": {
+              title: "Types and amount of scientific data expected to be generated in the project",
+              description: "The project expects to generate approximately 500 GB of genomic data, including FASTQ, BAM, and CSV files."
+            },
+            "2": {
+              title: "Scientific data that will be preserved and shared, and the rationale for doing so",
+              description: "All generated genomic data will be preserved and shared in a publicly accessible repository, as de-identified data can provide valuable insights into immune responses to viral antigens."
+            },
+            "3": {
+              title: "Metadata, other relevant data, and associated documentation",
+              description: "Study protocols, data collection instruments, and metadata describing the experimental design and sample characteristics will be made accessible to facilitate interpretation of the scientific data."
+            }
+          },
+          "Element 2: Related Tools, Software and/or Code": {
+            description: "The FASTQ, BAM, and CSV files can be accessed using standard bioinformatics tools and software. Additional tools may be needed for specific analysis steps."
+          },
+          "Element 3: Standards": {
+            description: "The project will adhere to the following data standards: Fastq-XML, SAM/BAM, and CSV. These standards enable interoperability of datasets and resources."
+          },
+          "Element 4: Data Preservation, Access, and Associated Timelines": {
+            "1": {
+              title: "Repository where scientific data and metadata will be archived",
+              description: "The scientific data and metadata will be archived in the National Institute of Allergy and Infectious Diseases (NIAID) Biodefense Research Database."
+            },
+            "2": {
+              title: "How scientific data will be findable and identifiable",
+              description: "Scientific data will be made findable through a persistent unique identifier, such as a DOI or accession number."
+            },
+            "3": {
+              title: "When and how long the scientific data will be made available",
+              description: "The scientific data will be made publicly available within 6 months of project completion. Data will remain accessible for at least 5 years from the date of initial release."
+            }
+          },
+          "Element 5: Access, Distribution, or Reuse Considerations": {
+            "1": {
+              title: "Factors affecting subsequent access, distribution, or reuse of scientific data",
+              description: "The project will ensure that all generated data are de-identified and publicly accessible, with no restrictions on subsequent access, distribution, or reuse."
+            },
+            "2": {
+              title: "Whether access to scientific data will be controlled",
+              description: "Access to the scientific data will not be controlled; it will be made available through a public repository."
+            },
+            "3": {
+              title: "Protections for privacy, rights, and confidentiality of human research participants",
+              description: "As de-identified genomic data are being shared, protections for privacy, rights, and confidentiality of human research participants are ensured through broad consent obtained."
+            }
+          },
+          "Element 6: Oversight of Data Management and Sharing": {
+            description: "The Principal Investigator will be responsible for ensuring compliance with this Plan. Quarterly progress reports will be submitted to the NIAID Program Official, and a final report detailing data management and sharing efforts will be submitted within 90 days of project completion."
+          }
+        }
+      },
+      message: "DMSP generated successfully for Immune Response Study"
+    };
 
-    // save into global nuxt state
-    dmpStore.value = res.data.llama3
-    console.log(res.data.llama3)
+    // Use mock response
+    dmpStore.value = mockRes.data.llama3;
+    console.log(mockRes.data.llama3);
+
+    // ======= Original API call, commented out =======
+    // const res = await $fetch('/api/query', {
+    //   method: 'POST',
+    //   body: payload
+    // });
+    // dmpStore.value = res.data.llama3;
+    // console.log(res.data.llama3);
+
     // navigate to page 1
-    navigateTo('/app/dmp1')
-
+    navigateTo('/app/dmp1');
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
 

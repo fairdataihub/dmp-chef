@@ -20,10 +20,16 @@ const downloadItems = ref([
 ])
 const selectedFormat = ref('json')
 
-// Download handler
+const isFeedbackModalOpen = ref(false)
+const feedbackStep = ref(1) // 1 = Faces, 2 = Comment box
+const userRating = ref<'yes' | 'no' | null>(null)
+const userComment = ref('')
+
+// Update the handleDownload function to open the modal
 async function handleDownload() {
   if (!dmp.value) return
 
+  // 1. Perform the actual download
   switch (selectedFormat.value) {
     case 'json':
       downloadJSON()
@@ -35,6 +41,27 @@ async function handleDownload() {
       downloadPDF()
       break
   }
+
+  // 2. Open the feedback modal (Reset state first)
+  feedbackStep.value = 1
+  userRating.value = null
+  userComment.value = ''
+  isFeedbackModalOpen.value = true
+}
+
+// Handle the user clicking a Face button
+function handleRating(rating: 'yes' | 'no') {
+  userRating.value = rating
+  feedbackStep.value = 2 // Move to next step
+}
+
+// Final Submit
+function submitFeedback() {
+  // Logic to send data to backend would go here later
+  console.log('Feedback:', { rating: userRating.value, comment: userComment.value })
+  
+  // Close modal
+  isFeedbackModalOpen.value = false
 }
 
 // JSON
@@ -145,40 +172,89 @@ const items = ref([
       </div>
 
       
-  <UModal title="Feedback">
-    <!-- Download button -->
-      <div class="flex justify-center pt-4">
-        <UButton
-          color="primary"
-          size="xl"
-          class="w-40"
-          icon="material-symbols:download-rounded"
-          @click="handleDownload"
-        >
-          Download
-        </UButton>
-      </div>
-
-    <template #body>
-      <div class="space-y-2">
-      <p class="text-xl text-center">
-        The file has been downloaded successfully! We welcome any feedback you may have.
-      </p>
-      <UTextarea :rows="8" autoresize placeholder="Give feedback" class="w-full" v-model="value" />
-    </div>
-
-    <div class="flex justify-center pt-4">
-      <UButton
-        to=""
+<div class="flex items-center justify-between mt-8">
+              <UButton 
         color="primary"
         size="xl"
-        class="w-20"
+        class="w-25"
+        icon="ooui:arrow-next-rtl"
+        to="/app/dmp1"
       >
-        Submit
+        Back
       </UButton>
-    </div>
-    </template>
-  </UModal>
+
+        <UModal title="Feedback">
+          <UButton
+            color="primary"
+            size="xl"
+            class="w-40"
+            icon="material-symbols:download-rounded"
+            @click="handleDownload" 
+          >
+            Download
+          </UButton>
+
+          <template #body>
+            <div class="p-6 sm:p-8">
+              
+              <div v-if="feedbackStep === 1" class="flex flex-col items-center space-y-6">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                  Was this page helpful?
+                </h3>
+                
+                <div class="flex gap-8">
+                  <button 
+                    @click="handleRating('yes')"
+                    class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-green-50 dark:hover:bg-green-900/20 transition-all border-2 border-transparent hover:border-green-200"
+                  >
+                    <UIcon name="i-heroicons-face-smile" class="w-16 h-16 text-gray-400 group-hover:text-green-500 transition-colors" />
+                    <span class="font-medium text-gray-600 dark:text-gray-300 group-hover:text-green-600">Yes</span>
+                  </button>
+
+                  <button 
+                    @click="handleRating('no')"
+                    class="group flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border-2 border-transparent hover:border-red-200"
+                  >
+                    <UIcon name="i-heroicons-face-frown" class="w-16 h-16 text-gray-400 group-hover:text-red-500 transition-colors" />
+                    <span class="font-medium text-gray-600 dark:text-gray-300 group-hover:text-red-600">No</span>
+                  </button>
+                </div>
+              </div>
+
+              <div v-else class="space-y-4">
+                <div class="text-center">
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                    Thank you for your feedback!
+                  </h3>
+                  <p class="text-sm text-gray-500 mt-1">
+                    Would you like to leave any additional comments?
+                  </p>
+                </div>
+
+                <UTextarea 
+                  v-model="userComment"
+                  :rows="4" 
+                  autoresize 
+                  placeholder="Any additional comments?" 
+                  class="w-full" 
+                />
+
+                <div class="flex justify-end pt-2">
+                  <UButton
+                    color="primary"
+                    size="lg"
+                    block
+                    @click="submitFeedback"
+                  >
+                    Send Feedback
+                  </UButton>
+                </div>
+              </div>
+
+            </div>
+          </template>
+        </UModal>
+      </div>
       <SkyBg />
     </div>
   </div>

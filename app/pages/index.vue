@@ -6,7 +6,7 @@ useSeoMeta({
 const links = ref([
   {
     label: "Get started",
-    to: "/docs/getting-started",
+    to: "/app/dmp",
     icon: "i-lucide-square-play",
   },
   {

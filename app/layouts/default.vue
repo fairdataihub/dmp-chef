@@ -11,11 +11,6 @@ const logout = async () => {
 
 const headerItems = computed<NavigationMenuItem[]>(() => [
   {
-    label: "Dashboard",
-    to: "/app/dashboard",
-    active: route.path.startsWith("/app/dashboard"),
-  },
-  {
     label: "Draft DMP",
     to: "/app/dmp",
     target: "_blank",

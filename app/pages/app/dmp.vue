@@ -2,7 +2,9 @@
 // definePageMeta({
 //   middleware: ["auth"],
 // });
+import { DotLottieVue } from '@lottiefiles/dotlottie-vue'
 
+// --- State Variables for Form and Loader ---
 const selectedAgency = ref('') 
 const agencyItems = ref([
   { label: 'NIH', value: 'NIH' },
@@ -71,7 +73,13 @@ const items = ref([
   }
 ])
 
+// --- Loader State ---
+const isGenerating = ref(false)
+
 async function generateDMP() {
+  // 1. Set the loading state to true (This opens the UModal)
+  isGenerating.value = true;
+  
   const payload = {
     agency: agency.value,
     projectSummary: projectSummary.value,
@@ -84,6 +92,9 @@ async function generateDMP() {
 
   try {
     // ======= Hardcoded response for frontend testing =======
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 3000)); // 3 second delay
+
     const mockRes = {
       data: {
         llama3: {
@@ -147,21 +158,18 @@ async function generateDMP() {
     dmpStore.value = mockRes.data.llama3;
     console.log(mockRes.data.llama3);
 
-    // ======= Original API call, commented out =======
-    // const res = await $fetch('/api/query', {
-    //   method: 'POST',
-    //   body: payload
-    // });
-    // dmpStore.value = res.data.llama3;
-    // console.log(res.data.llama3);
+    // 3. Hide the loader
+    isGenerating.value = false;
 
-    // navigate to page 1
+    // 4. Navigate to the next page
     navigateTo('/app/dmp1');
+
   } catch (err) {
     console.error(err);
+    // Ensure loader is hidden on error
+    isGenerating.value = false; 
   }
 }
-
 </script>
 
 <template>
@@ -171,8 +179,14 @@ async function generateDMP() {
       Draft DMP 
     </h1>
     <UTimeline orientation="horizontal" :default-value="0.5" :items="items" size="sm" class="w-full mb-6 ml-30" />
-    <p class="text-lg">Provide essential information about your research project so DMP Chef can generate a Data Management Plan that meets your funder’s requirements.</p>
-    <USeparator class="mb-6" />
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
+      <span class="inline-block bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded mb-3 uppercase tracking-wide dark:bg-indigo-500">
+        Action Required
+      </span>
+      <p class="text-lg text-gray-800 font-medium dark:text-gray-100">
+        Provide essential information about your research project so DMP Chef can generate a Data Management Plan that meets your funder’s requirements.
+      </p>
+    </div>
     <div class="flex items-center justify-between gap-6 ml-60 mb-6">
       <h1 class="font-medium text-xl w-1/3">Funding Agency:</h1>
       <div class="w-2/3">
@@ -244,16 +258,32 @@ async function generateDMP() {
     </div>
     
     <div v-if="selectedAgency === 'NIH'" class="flex justify-center pt-4">
-      <UButton
-        loading-auto
-        @click="generateDMP"
-        color="primary"
-        size="xl"
-        class="w-45"
-        icon="i-lucide-sparkles"
-      >
-        Generate DMP
-      </UButton>
+      <UModal v-model="isGenerating" prevent-close :ui="{ width: 'sm:max-w-md' }">
+        
+        <UButton
+          :loading="isGenerating"
+          @click="generateDMP"
+          color="primary"
+          size="xl"
+          class="w-45"
+          icon="i-lucide-sparkles"
+        >
+          Generate DMP
+        </UButton>
+
+        <template #content>
+          <div class="p-4 flex flex-col items-center justify-center">
+            <DotLottieVue 
+              style="height: 200px; width: 200px" 
+              autoplay 
+              loop 
+              src="https://lottie.host/5cf19f5c-069f-4fe3-b34d-d339768dab6e/yqwsIi0a0D.lottie" 
+            />
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-200 mt-4">Cooking your DMP...</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">This may take a moment.</p>
+          </div>
+        </template>
+      </UModal>
     </div>
 
     <SkyBg />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
-
+const themeColor = computed(() => (colorMode.value === "dark" ? "#111827" : "white"));
 useHead({
   htmlAttrs: {
     lang: "en",
@@ -11,7 +11,7 @@ useHead({
     { name: "viewport", content: "width=device-width, initial-scale=1" },
     {
       name: "theme-color",
-      content: colorMode.value === "dark" ? "#111827" : "white",
+      content: themeColor.value,
       key: "theme-color",
     },
   ],

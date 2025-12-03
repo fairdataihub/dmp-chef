@@ -11,7 +11,7 @@ const links = ref([
   },
   {
     label: "Learn more",
-    to: "/docs/getting-started/theme/design-system",
+    to: "https://fairdataihub.org/dmp-chef",
     variant: "subtle" as const,
     trailingIcon: "i-lucide-arrow-right",
   },
@@ -101,19 +101,14 @@ const technologies = ref([
 
 const communitylinks = ref([
   {
-    label: 'Track progress',
-    icon: 'i-lucide-rocket',
-    to: 'https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md'
-  },
-  {
     label: 'Contribute via GitHub',
     icon: 'i-lucide-star',
-    to: 'https://github.com/nuxt/ui'
+    to: 'https://github.com/fairdataihub/dmp-chef'
   },
   {
     label: 'Provide feedback',
     icon: 'i-lucide-file-pen',
-    to: 'https://github.com/nuxt/ui/releases'
+    to: '/app/tallyembed'
   }
 ])
 </script>
@@ -124,13 +119,49 @@ const communitylinks = ref([
     <UPageHero
       class="mb-40"
       title="DMP Chef"
-      description="A free, open-source, AI-assisted platform for creating Data Management Plans"
+      description="Crafting Funder-Compliant Data Management Plans"
       orientation="vertical"
       :links="links"
     >
       <SkyBg />
     </UPageHero>
 
+<UContainer class="mb-24">
+  <div class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-xl">
+    
+    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+    <div class="relative p-10 md:p-14 text-center z-10">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+        Overview
+      </h2>
+      
+      <div class="mx-auto space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p>
+          <span class="font-semibold text-blue-400 dark:text-white">DMP Chef</span>  is a free and open-source platform for drafting funder-compliant Data Management Plans (DMPs) by leveraging Artificial Intelligence (AI)-based pipelines.
+        </p>
+        <p>
+          The platform aims to address challenges faced by researchers when preparing DMPs due to lack of knowledge, expertise, or support.
+        </p>
+      </div>
+
+      <div class="my-10 border-t border-gray-100 dark:border-gray-800 w-24 mx-auto"></div>
+
+      <div class="mx-auto bg-gray-50 dark:bg-white/5 rounded-xl p-6 border border-gray-100 dark:border-white/10">
+        <p class="text-base text-gray-700 dark:text-gray-200">
+          DMP Chef is developed in collaboration with the 
+          <a href="https://cdlib.org" class="font-bold underline text-blue-400 dark:text-white">California Digital Library</a>, 
+          through a grant from the 
+          <a href="https://www.ucop.edu" class="font-bold underline text-blue-400 dark:text-white">University of California Office of The President (UCOP)</a> 
+          and the 
+          <a href="https://chanzuckerberg.com" class="font-bold underline text-blue-400 dark:text-white">Chan Zuckerberg Initiative (CZI)</a>.
+        </p>
+      </div>
+      
+    </div>
+  </div>
+</UContainer>
     <h2 class="text-2xl font-bold text-center mb-10">
       Key <span class="text-blue-400">Features</span> 
     </h2>

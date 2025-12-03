@@ -157,8 +157,14 @@ const items = ref([
         Draft DMP 
       </h1>
       <UTimeline orientation="horizontal" :default-value="2" :items="items" size="sm" class="w-full mb-6 ml-30" />
-      <p class="text-lg">Export the final DMP in your preferred format (JSON, DOCX, or PDF).</p>
-      <USeparator class="mb-6" />
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
+        <span class="inline-block bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded mb-3 uppercase tracking-wide dark:bg-indigo-500">
+          Action Required
+        </span>
+        <p class="text-lg text-gray-800 font-medium dark:text-gray-100">
+          Export the final DMP in your preferred format (JSON, DOCX, or PDF).
+        </p>
+      </div>
 
       <!-- Format selection -->
       <div class="space-y-2">

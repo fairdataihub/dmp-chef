@@ -21,13 +21,13 @@ const headerItems = computed<NavigationMenuItem[]>(() => [
   },
   {
     label: "Contact us",
-    to: "",
+    to: "/app/tallyembed",
   },
 ]);
 
 const footerItems: NavigationMenuItem[] = [
   {
-    label: "Made by FAIR Data Innovations Hub",
+    label: "Made with ♥ by the FAIR Data Innovations Hub",
     to: "https://fairdataihub.org",
     target: "_blank",
   },
@@ -97,29 +97,12 @@ const footerItems: NavigationMenuItem[] = [
       <UNavigationMenu :items="footerItems" variant="link" />
 
       <template #right>
-        <UButton
-          icon="i-simple-icons-discord"
-          color="neutral"
-          variant="ghost"
-          to="https://discord.gg/fairdataihub"
-          target="_blank"
-          aria-label="Discord"
-        />
-
-        <UButton
-          icon="i-simple-icons-x"
-          color="neutral"
-          variant="ghost"
-          to="https://x.com/fairdataihub"
-          target="_blank"
-          aria-label="X"
-        />
-
+        
         <UButton
           icon="i-simple-icons-github"
           color="neutral"
           variant="ghost"
-          to="https://github.com/fairdataihub"
+          to="https://github.com/fairdataihub/dmp-chef"
           target="_blank"
           aria-label="GitHub"
         />

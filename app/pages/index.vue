@@ -99,6 +99,35 @@ const technologies = ref([
   }
 ])
 
+// Added the new data for the Roadmap Timeline
+const roadmapItems = ref([
+  {
+    date: 'Oct 2025 – Mar 2026',
+    title: 'Phase 1',
+    description: 'Define the user workflow, test improvement strategies, and build the Alpha prototype to draft NIH-compliant DMPs. This phase ends with internal testing and refinement.',
+    icon: 'i-lucide-git-branch'
+  },
+  {
+    date: 'Apr 2026 – Sep 2026',
+    title: 'Phase 2',
+    description: 'Add general-purpose and multi-funder DMP drafting capabilities (e.g., NSF) and deliver the Beta prototype. This phase ends with external user testing and refinement.',
+    icon: 'i-lucide-package-open'
+  },
+  {
+    isSpacer: true,
+    date: '',
+    title: '',
+    description: '',
+    icon: 'i-lucide-more-horizontal'
+  },
+  {
+    date: '20XX - 20XX',
+    title: 'Phase N: Integration with DMP Tools',
+    description: 'Integrate the DMP Chef back-end with <a href="https://dmptool.org" target="_blank" class="text-blue-500 underline">DMPTool.org</a>',
+    icon: 'i-lucide-server'
+  }
+])
+
 const communitylinks = ref([
   {
     label: 'Contribute via GitHub',
@@ -118,7 +147,7 @@ const communitylinks = ref([
     <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-blue-300 to-white dark:from-blue-800 dark:to-transparent -z-10"></div>
     <UPageHero
       class="mb-40"
-      title="DMP Chef"
+      title="DMP Chef (Beta)"
       description="Crafting Funder-Compliant Data Management Plans"
       orientation="vertical"
       :links="links"
@@ -139,10 +168,12 @@ const communitylinks = ref([
       
       <div class="mx-auto space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
         <p>
-          <span class="font-semibold text-blue-400 dark:text-white">DMP Chef</span>  is a free and open-source platform for drafting funder-compliant Data Management Plans (DMPs) by leveraging Artificial Intelligence (AI)-based pipelines.
-        </p>
-        <p>
-          The platform aims to address challenges faced by researchers when preparing DMPs due to lack of knowledge, expertise, or support.
+          <span class="font-semibold text-blue-400 dark:text-white">DMP Chef</span>  is developed in collaboration with
+          <a href="http://dmptool.org/" class="font-bold underline text-blue-400 dark:text-white">DMPTool.org</a> 
+          as a testing ground for AI-assisted Data Management Plan (DMP) drafting. Its purpose is to experiment, 
+          iterate, and gather community feedback on AI-based pipelines that could help researchers create funder-compliant 
+          DMPs with less effort. Validated and production-ready capabilities developed here will ultimately be incorporated 
+          into <a href="http://dmptool.org/" class="font-bold underline text-blue-400 dark:text-white">DMPTool.org</a> .
         </p>
       </div>
 
@@ -282,6 +313,29 @@ const communitylinks = ref([
         </div>
       </UContainer>
     </section>
+
+    <UContainer class="my-20">
+      <h2 class="text-3xl font-bold text-center mb-12">
+          Project <span class="text-blue-400">Roadmap</span>
+      </h2>
+      <div class="p-8 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 dark:bg-gray-900/50 shadow-lg">
+         <UTimeline 
+            :items="roadmapItems" 
+            :ui="{
+              wrapper: 'space-y-6',
+              container: 'min-h-12',
+              date: 'text-sm text-gray-500 dark:text-gray-400 font-medium',
+              title: 'text-xl font-bold text-gray-900 dark:text-white',
+              description: 'text-base text-gray-700 dark:text-gray-300',
+            }" 
+          >
+          <template #description="{ item }">
+            <div v-if="item.isSpacer" style="height: 6rem;"></div>
+            <div v-else v-html="item.description"></div>
+          </template>
+          </UTimeline>
+      </div>
+    </UContainer>
 
     <UContainer>
       <UPageHero

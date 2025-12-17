@@ -2,7 +2,7 @@
 const { loggedIn } = useUserSession();
 
 if (loggedIn.value) {
-  await navigateTo("/dashboard");
+  await navigateTo("/app/dmp");
 }
 
 definePageMeta({

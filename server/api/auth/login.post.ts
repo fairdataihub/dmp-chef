@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const session = await getUserSession(event);
 
   if ("user" in session) {
-    return sendRedirect(event, "/app/dashboard");
+    return sendRedirect(event, "/app/dmp");
   }
 
   const body = await readValidatedBody(event, (b) => loginSchema.safeParse(b));
@@ -68,5 +68,5 @@ export default defineEventHandler(async (event) => {
     userSessionField: "",
   });
 
-  return sendRedirect(event, "/app/dashboard");
+  return sendRedirect(event, "/app/dmp");
 });

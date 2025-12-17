@@ -8,7 +8,7 @@ const route = useRoute();
 const routeQueryParams = route.query;
 
 if (loggedIn.value) {
-  await navigateTo("/app/dashboard");
+  await navigateTo("/app/dmp");
 }
 
 definePageMeta({
@@ -60,7 +60,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
         window.location.href = routeQueryParams.redirect as string;
       } else {
-        window.location.href = "/app/dashboard";
+        window.location.href = "/app/dmp";
       }
     })
     .catch((error) => {

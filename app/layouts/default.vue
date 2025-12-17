@@ -50,7 +50,7 @@ const footerItems: NavigationMenuItem[] = [
           <UButton
             color="neutral"
             variant="ghost"
-            to="https://github.com/fairdataihub/nuxt-starter"
+            to="https://github.com/fairdataihub/dmp-chef"
             target="_blank"
             icon="i-simple-icons-github"
             aria-label="GitHub"

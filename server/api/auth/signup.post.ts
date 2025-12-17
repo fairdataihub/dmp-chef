@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const session = await getUserSession(event);
 
   if ("user" in session) {
-    return sendRedirect(event, "/app/dashboard");
+    return sendRedirect(event, "/app/dmp");
   }
 
   const config = useRuntimeConfig();

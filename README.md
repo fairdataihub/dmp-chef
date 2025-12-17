@@ -1,4 +1,4 @@
-# Nuxt Starter
+# DMP Chef
 
 ## Getting started
 
@@ -16,7 +16,7 @@ You will need the following installed on your system:
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/fairdataihub/nuxt-starter.git
+   git clone git@github.com:fairdataihub/dmp-chef.git
    ```
 
 2. Install the dependencies

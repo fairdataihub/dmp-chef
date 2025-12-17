@@ -5,8 +5,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     // call the Flask microservice
-    const flaskUrl = process.env.FLASK_URL || 'http://localhost:5001/query'
-
+    const flaskUrl = process.env.FLASK_URL || 'https://generator.dmpchef.org/query'
     const res = await $fetch(flaskUrl, {
       method: 'POST',
       body,

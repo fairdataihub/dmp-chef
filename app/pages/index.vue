@@ -4,7 +4,7 @@ useSeoMeta({
 });
 
 const links = ref([
-  { label: "View GitHub repo", to: "https://github.com/fairdataihub/DMP_Chef_Phase-1", icon: "i-simple-icons-github", target: "_blank" },
+  { label: "View GitHub repo", to: "https://github.com/fairdataihub/dmpchef", icon: "i-simple-icons-github", target: "_blank" },
   { label: "Test it", to: "/app/dmp", variant: "subtle" as const, trailingIcon: "i-lucide-arrow-right" },
 ]);
 
@@ -32,7 +32,7 @@ const roadmapItems = ref([
 ]);
 
 const communitylinks = ref([
-  { label: 'Contribute via GitHub', icon: 'i-lucide-star', to: 'https://github.com/fairdataihub/dmp-chef' },
+  { label: 'Contribute via GitHub', icon: 'i-lucide-star', to: 'https://github.com/fairdataihub/dmpchef' },
   { label: 'Provide feedback', icon: 'i-lucide-file-pen', to: '/app/tallyembed' }
 ]);
 </script>

@@ -12,7 +12,7 @@ const logout = async () => {
 const headerItems = computed<NavigationMenuItem[]>(() => [
   {
     label: "GitHub",
-    to: "https://github.com/fairdataihub/dmp-chef",
+    to: "https://github.com/fairdataihub/dmpchef",
     target: "_blank",
   },
   {
@@ -106,7 +106,7 @@ const footerItems: NavigationMenuItem[] = [
           icon="i-simple-icons-github"
           color="neutral"
           variant="ghost"
-          to="https://github.com/fairdataihub/dmp-chef"
+          to="https://github.com/fairdataihub/dmpchef"
           target="_blank"
           aria-label="GitHub"
         />

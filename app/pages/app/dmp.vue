@@ -208,8 +208,11 @@ async function generateDMP() {
   <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-blue-300 to-white dark:from-blue-800 dark:to-transparent -z-10"></div>
   <div class="mx-auto flex w-full max-w-screen-xl flex-col gap-6 px-6">
     <h1 class="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-6 mt-6">
-      Draft DMP 
+      Test DMP Chef
     </h1>
+    <p>This page is meant only for testing and validating the DMP Chef Python pipeline. 
+      Ultimately the DMP Chef pipeline will be integrated in DMPTool.org to provide researchers with a 
+      familiar and convenient user interface that does not require any coding knowledge</p>
     <UTimeline orientation="horizontal" :default-value="0.5" :items="items" size="sm" class="w-full mb-6 ml-30" />
     <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
       <span class="inline-block bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded mb-3 uppercase tracking-wide dark:bg-indigo-500">

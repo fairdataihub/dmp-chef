@@ -154,7 +154,7 @@ const items = ref([
     <div class="mx-auto flex w-full max-w-screen-xl flex-col gap-6 px-6 pt-6">
       <!-- Header -->
       <h1 class="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-6 mt-6">
-        Draft DMP 
+        Test DMP Chef 
       </h1>
       <UTimeline orientation="horizontal" :default-value="2" :items="items" size="sm" class="w-full mb-6 ml-30" />
       <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">

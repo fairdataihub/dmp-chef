@@ -50,7 +50,7 @@ defineShortcuts({
 
   <div class="flex items-center justify-between mb-6 mt-6">
   <h1 class="text-4xl font-bold text-blue-500 dark:text-blue-300">
-    Draft DMP
+    Test DMP Chef
   </h1>
 
   <UButton

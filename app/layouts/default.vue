@@ -11,9 +11,13 @@ const logout = async () => {
 
 const headerItems = computed<NavigationMenuItem[]>(() => [
   {
-    label: "Draft DMP",
-    to: "/app/dmp",
+    label: "GitHub",
+    to: "https://github.com/fairdataihub/dmp-chef",
     target: "_blank",
+  },
+  {
+    label: "Test",
+    to: "/app/dmp",
   },
   {
     label: "Documentation",
@@ -46,7 +50,7 @@ const footerItems: NavigationMenuItem[] = [
       <template #right>
         <UColorModeButton />
 
-        <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+        <!-- <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
           <UButton
             color="neutral"
             variant="ghost"
@@ -55,9 +59,9 @@ const footerItems: NavigationMenuItem[] = [
             icon="i-simple-icons-github"
             aria-label="GitHub"
           />
-        </UTooltip>
+        </UTooltip> -->
 
-        <AuthState v-slot="{ loggedIn }">
+        <!-- <AuthState v-slot="{ loggedIn }">
           <UButton
             v-if="loggedIn"
             color="neutral"
@@ -79,7 +83,7 @@ const footerItems: NavigationMenuItem[] = [
               Sign up
             </UButton>
           </div>
-        </AuthState>
+        </AuthState> -->
       </template>
     </UHeader>
 

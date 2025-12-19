@@ -5,38 +5,18 @@ useSeoMeta({
 
 const links = ref([
   {
-    label: "Get started",
-    to: "/app/dmp",
-    icon: "i-lucide-square-play",
+    label: "View GitHub repo",
+    to: "https://github.com/fairdataihub/dmp-chef",
+    icon: "i-simple-icons-github",
+    target: "_blank",
   },
   {
-    label: "Learn more",
-    to: "https://fairdataihub.org/dmp-chef",
+    label: "Test it",
+    to: "/app/dmp",
     variant: "subtle" as const,
     trailingIcon: "i-lucide-arrow-right",
   },
 ]);
-
-const features = ref([
-  {
-    title: 'AI-Assisted Drafting',
-    description: 'Generate funder-compliant Data Management Plans (DMPs) automatically using AI models trained on real funder templates and FAIR data principles.',
-    icon: 'i-lucide-brain',
-    to: ''
-  },
-  {
-    title: 'Multi-Funder Support',
-    description: 'Create DMPs tailored to specific agencies including NIH, NSF, and other national and international funding bodies.',
-    icon: 'i-lucide-globe',
-    to: ''
-  },
-  {
-    title: 'Export Options',
-    description: 'Easily export finalized DMPs in DOCX, PDF, or machine-actionable JSON formats for seamless submission and archiving.',
-    icon: 'i-lucide-file-text',
-    to: ''
-  }
-])
 
 const snapshots = ref([
   {
@@ -145,55 +125,152 @@ const communitylinks = ref([
 <template>
   <div>
     <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-blue-300 to-white dark:from-blue-800 dark:to-transparent -z-10"></div>
+    <div class="flex flex-col items-center">
+      <div class="flex justify-center mt-30">
+        <img 
+          src="/../public/logos/logo-dmpchef-transparent.svg" 
+          alt="DMP Chef Logo" 
+          class="h-30 w-auto" 
+        />
+      </div>
+    </div>
     <UPageHero
-      class="mb-40"
-      title="DMP Chef (Beta)"
-      description="Crafting Funder-Compliant Data Management Plans"
+      class="mb-20"
+      title="DMP Chef"
+      description="A Python pipeline for crafting Data Management Plans (DMPs)"
       orientation="vertical"
       :links="links"
     >
       <SkyBg />
     </UPageHero>
-
 <UContainer class="mb-24">
-  <div class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-xl">
-    
-    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+  <section
+    class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-xl"
+  >
+    <!-- Background glow effects -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div
+        class="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-blue-200 dark:bg-blue-900/30 blur-3xl opacity-50"
+      />
+      <div
+        class="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-indigo-200 dark:bg-indigo-900/30 blur-3xl opacity-50"
+      />
+    </div>
 
-    <div class="relative p-10 md:p-14 text-center z-10">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
+    <!-- Content -->
+    <div class="relative z-10 px-8 py-12 md:px-14 md:py-16 text-center">
+      <h2
+        class="mb-8 text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
         Overview
       </h2>
-      
-      <div class="mx-auto space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+
+      <div
+        class="mx-auto max-w-4xl space-y-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300"
+      >
         <p>
-          <span class="font-semibold text-blue-400 dark:text-white">DMP Chef</span>  is developed in collaboration with
-          <a href="http://dmptool.org/" class="font-bold underline text-blue-400 dark:text-white">DMPTool.org</a> 
-          as a testing ground for AI-assisted Data Management Plan (DMP) drafting. Its purpose is to experiment, 
-          iterate, and gather community feedback on AI-based pipelines that could help researchers create funder-compliant 
-          DMPs with less effort. Validated and production-ready capabilities developed here will ultimately be incorporated 
-          into <a href="http://dmptool.org/" class="font-bold underline text-blue-400 dark:text-white">DMPTool.org</a> .
+          <span class="font-semibold text-blue-500 dark:text-blue-400">
+            DMP Chef
+          </span> is an open-source (MIT License), Python-based pipeline that leverages AI to draft funder-compliant 
+          Data Management Plans (DMPs). Researchers often struggle to write DMPs because they require advance knowledge 
+          of data types, metadata standards, repositories, and funder-specific sharing requirements. 
+          DMP Chef addresses this challenge by translating high-level project descriptions into funder-compliant DMP, 
+          using a tailored prompt, funder templates, funder guidelines, and a large language model (LLM).  
+          This project is part of a broader extension of the 
+          <a
+            href="https://dmptool.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold underline text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+          >
+            DMPTool
+          </a>
+           platform. 
+        </p>
+
+        <p>
+          This website is meant to provide information about the DMP Chef pipeline and also provide a testing interface. 
+          The ultimate goal is to integrate the DMP Chef pipeline into DMPTool.org, providing researchers with a familiar 
+          and convenient user interface that does not require any coding knowledge.
         </p>
       </div>
-
-      <div class="my-10 border-t border-gray-100 dark:border-gray-800 w-24 mx-auto"></div>
-
-      <div class="mx-auto bg-gray-50 dark:bg-white/5 rounded-xl p-6 border border-gray-100 dark:border-white/10">
-        <p class="text-base text-gray-700 dark:text-gray-200">
-          DMP Chef is developed in collaboration with the 
-          <a href="https://cdlib.org" class="font-bold underline text-blue-400 dark:text-white">California Digital Library</a>, 
-          through a grant from the 
-          <a href="https://www.ucop.edu" class="font-bold underline text-blue-400 dark:text-white">University of California Office of The President (UCOP)</a> 
-          and the 
-          <a href="https://chanzuckerberg.com" class="font-bold underline text-blue-400 dark:text-white">Chan Zuckerberg Initiative (CZI)</a>.
-        </p>
-      </div>
-      
     </div>
-  </div>
+  </section>
 </UContainer>
-    <h2 class="text-2xl font-bold text-center mb-10">
+
+<UContainer class="py-16">
+    <div class="text-center space-y-8">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+        Team
+      </h2>
+
+      <p class="max-w-5xl mx-auto text-lg leading-8 text-gray-700 dark:text-gray-300">
+        <span class="font-bold text-blue-400 dark:text-white">DMP Chef</span> is developed by the 
+        <span class="font-semibold text-gray-900 dark:text-white">FAIR Data Innovations Hub</span> 
+        in collaboration with the 
+        <span class="font-semibold text-gray-900 dark:text-white">California Digital Library (CDL)</span> 
+        who are developing and maintaining 
+        <span class="font-semibold text-gray-900 dark:text-white">DMPTool</span>
+         platform.
+      </p>
+
+      
+<div
+  class="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center justify-items-center pt-8"
+>
+  <a
+    href="https://fairdataihub.org"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex h-24 w-56 items-center justify-center rounded-xl
+           dark:bg-white/90
+           dark:border dark:border-white/10
+           dark:shadow-sm"
+  >
+    <img
+      src="/logos/fair_logo.svg"
+      alt="FAIR Data Innovations Hub"
+      class="h-14 w-auto object-contain"
+    />
+  </a>
+
+  <a
+    href="https://cdlib.org"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex h-24 w-56 items-center justify-center rounded-xl
+           dark:bg-white/90
+           dark:border dark:border-white/10
+           dark:shadow-sm"
+  >
+    <img
+      src="/logos/logo-cdl.svg"
+      alt="California Digital Library"
+      class="h-14 w-auto object-contain"
+    />
+  </a>
+
+  <a
+    href="https://dmptool.org"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex h-24 w-56 items-center justify-center rounded-xl
+           dark:bg-white/90
+           dark:border dark:border-white/10
+           dark:shadow-sm"
+  >
+    <img
+      src="/logos/dmp_tool_logo.svg"
+      alt="DMPTool"
+      class="h-14 w-auto object-contain"
+    />
+  </a>
+</div>
+
+
+    </div>
+  </UContainer>
+    <!-- <h2 class="text-2xl font-bold text-center mb-10">
       Key <span class="text-blue-400">Features</span> 
     </h2>
     <UContainer class="mb-20">
@@ -215,8 +292,8 @@ const communitylinks = ref([
         </template>
         <img src="/ai.jpg" alt="Tailwind CSS" class="w-full rounded-lg shadow-2xl ring ring-default" />
       </UPageCard>
-    </UContainer>
-    <UContainer class="mb-20">
+    </UContainer> -->
+    <!-- <UContainer class="mb-20">
       <UPageCard
         orientation="horizontal"
         reverse
@@ -273,8 +350,9 @@ const communitylinks = ref([
         />
       </UPageGrid>
       <SkyBg />
-    </UContainer>
+    </UContainer> -->
 
+    <!--
     <section class="relative py-20 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-[#1a1a1a] dark:via-gray-900 dark:to-gray-800 border border-blue-100 dark:border-gray-700">
       <UContainer>
         <h2 class="text-2xl font-bold mb-2">
@@ -292,14 +370,14 @@ const communitylinks = ref([
             variant="soft"
             class="p-6 bg-white/70 dark:bg-gray-900/50 border border-transparent rounded-2xl shadow-sm hover:shadow-md transition-all duration-200"
           >
-            <!-- Flex row: Icon on left, text on right -->
+            
             <div class="flex items-start gap-4">
-              <!-- Bigger Icon with border -->
+              
               <div class="flex items-center justify-center w-18 h-18 rounded-xl">
                 <UIcon :name="tech.icon" class="w-10 h-10 text-blue-400" />
               </div>
 
-              <!-- Text content: title + description -->
+              
               <div class="flex flex-col">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
                   {{ tech.title }}
@@ -313,7 +391,7 @@ const communitylinks = ref([
         </div>
       </UContainer>
     </section>
-
+    -->
     <UContainer class="my-20">
       <h2 class="text-3xl font-bold text-center mb-12">
           Project <span class="text-blue-400">Roadmap</span>
@@ -337,7 +415,29 @@ const communitylinks = ref([
       </div>
     </UContainer>
 
+      <section class="py-16">
     <UContainer>
+      <div class="mx-auto max-w-5xl text-center mb-10">
+        <h2 class="text-3xl font-semibold text-gray-900 dark:text-white">
+          Funding
+        </h2>
+
+        <p class="mt-4 text-base leading-relaxed text-gray-800 dark:text-white">
+          This project is a 
+          <a href="https://new.nsf.gov/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-blue-400 hover:text-blue-500 transition-colors">National Science Foundation (NSF)</a> 
+          and 
+          <a href="https://chanzuckerberg.com" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-blue-400 hover:text-blue-500 transition-colors">Chan Zuckerberg Initiative (CZI)</a>-funded collaboration between the 
+          <a href="https://fairdataihub.org" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-blue-400 hover:text-blue-500 transition-colors">FAIR Data Innovations Hub</a> 
+          and 
+          <a href="https://cdlib.org" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-blue-400 hover:text-blue-500 transition-colors">California Digital Library</a> 
+          (University of California Office of the President) as part of a broader extension of the 
+          <a href="https://dmptool.org" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-blue-400 hover:text-blue-500 transition-colors">DMPTool</a>  platform.
+        </p>
+      </div>
+    </UContainer>
+  </section>
+
+    <!-- <UContainer>
       <UPageHero
         orientation="vertical"
         :links="links"
@@ -356,7 +456,7 @@ const communitylinks = ref([
 
         <SkyBg />
       </UPageHero>
-    </UContainer>
+    </UContainer> -->
     <USeparator icon="i-simple-icons-nuxtdotjs" />
     <UContainer class="my-10">
       <UPageLinks title="Community" :links="communitylinks" />

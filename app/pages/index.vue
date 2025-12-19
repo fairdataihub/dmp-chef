@@ -44,7 +44,7 @@ const communitylinks = ref([
 
     <!-- Logo -->
     <div class="flex flex-col items-center mt-16">
-      <img src="/../public/logos/logo-dmpchef-transparent.svg" alt="DMP Chef Logo" class="h-20 w-auto" />
+      <img src="/../public/logos/logo-dmpchef-transparent.svg" alt="DMP Chef Logo" class="h-40 w-auto" />
     </div>
 
     <!-- Page hero -->

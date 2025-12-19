@@ -48,7 +48,7 @@ const communitylinks = ref([
     </div>
 
     <!-- Page hero -->
-    <UPageHero class="mb-5" title="DMP Chef" description="A Python pipeline for crafting Data Management Plans (DMPs)" orientation="vertical" :links="links">
+    <UPageHero class="-mt-30" title="DMP Chef" description="A Python pipeline for crafting Data Management Plans (DMPs)" orientation="vertical" :links="links">
       <SkyBg />
     </UPageHero>
 

@@ -79,8 +79,7 @@ defineShortcuts({
         rel="noopener noreferrer"
         class="text-blue-400 underline"
       >
-      template
-      </a> provided by National Institutes of Health (nih.gov) 
+      template</a> provided by National Institutes of Health (nih.gov) 
     </p>
   </div>
 

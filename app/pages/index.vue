@@ -48,7 +48,7 @@ const communitylinks = ref([
     </div>
 
     <!-- Page hero -->
-    <UPageHero class="-mt-30" title="DMP Chef" description="A Python pipeline for crafting Data Management Plans (DMPs)" orientation="vertical" :links="links">
+    <UPageHero class="-mt-24" title="DMP Chef" description="A Python pipeline for crafting Data Management Plans (DMPs)" orientation="vertical" :links="links">
       <SkyBg />
     </UPageHero>
 
@@ -84,7 +84,7 @@ const communitylinks = ref([
     <!-- Team section -->
     <UContainer class="py-12">
       <div class="text-center space-y-6">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Team</h2>
+        <h2 class="text-3xl font-bold">Team</h2>
         <p class="max-w-4xl mx-auto text-base leading-relaxed text-gray-700 dark:text-gray-300">
           <span class="font-bold text-blue-400 dark:text-white">DMP Chef</span> is developed by the 
           <span class="font-semibold text-gray-900 dark:text-white">FAIR Data Innovations Hub</span> 
@@ -122,7 +122,7 @@ const communitylinks = ref([
 
     <!-- Roadmap section -->
     <UContainer class="my-12">
-      <h2 class="text-3xl font-bold text-center mb-8">Project <span class="text-blue-400">Roadmap</span></h2>
+      <h2 class="text-3xl font-bold text-center mb-8">Project Roadmap</h2>
       <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 dark:bg-gray-900/50 shadow-lg">
         <UTimeline :items="roadmapItems" :ui="{ wrapper: 'space-y-4', container: 'min-h-10', date: 'text-sm text-gray-500 dark:text-gray-400 font-medium', title: 'text-xl font-bold text-gray-900 dark:text-white', description: 'text-base text-gray-700 dark:text-gray-300' }">
           <template #description="{ item }">
@@ -137,7 +137,7 @@ const communitylinks = ref([
     <section class="py-8">
       <UContainer>
         <div class="mx-auto max-w-4xl text-center">
-          <h2 class="text-3xl font-semibold text-gray-900 dark:text-white mb-4">Funding</h2>
+          <h2 class="text-3xl font-bold mb-4">Funding</h2>
           <p class="text-base leading-relaxed text-gray-800 dark:text-white">
             This project is a 
             <a href="https://new.nsf.gov/" target="_blank" rel="noopener noreferrer" class="font-semibold underline decoration-blue-400 hover:text-blue-500 transition-colors">National Science Foundation (NSF)</a> 

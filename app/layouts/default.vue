@@ -98,7 +98,7 @@ const footerItems: NavigationMenuItem[] = [
         </p>
       </template>
 
-      <UNavigationMenu :items="footerItems" variant="link" />
+      <!-- <UNavigationMenu :items="footerItems" variant="link" /> -->
 
       <template #right>
         

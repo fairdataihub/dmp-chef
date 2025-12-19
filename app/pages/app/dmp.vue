@@ -210,16 +210,16 @@ async function generateDMP() {
     <h1 class="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-6 mt-6">
       Test DMP Chef
     </h1>
-      <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-900 border border-amber-200 dark:border-amber-800 flex items-start space-x-3">
-    <UIcon name="i-heroicons-exclamation-triangle-20-solid" class="w-5 h-5 flex-shrink-0 text-amber-500 dark:text-amber-300" />
-    <div>
-      <h3 class="text-sm font-medium text-amber-800 dark:text-amber-100">
-        This page is meant only for testing and validating the DMP Chef Python pipeline. 
-    Ultimately, the DMP Chef pipeline will be integrated in DMPTool.org to provide researchers with a 
-    familiar and convenient user interface that does not require any coding knowledge.
-    </h3>
+    <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-900 border border-amber-200 dark:border-amber-800 flex items-start space-x-3">
+      <UIcon name="i-heroicons-exclamation-triangle-20-solid" class="w-5 h-5 flex-shrink-0 text-amber-500 dark:text-amber-300" />
+      <div>
+        <h3 class="text-sm font-medium text-amber-800 dark:text-amber-100">
+          This page is meant only for testing and validating the DMP Chef Python pipeline. 
+      Ultimately, the DMP Chef pipeline will be integrated in DMPTool.org to provide researchers with a 
+      familiar and convenient user interface that does not require any coding knowledge.
+      </h3>
+      </div>
     </div>
-  </div>
     
 
     <UTimeline orientation="horizontal" :default-value="0.5" :items="items" size="sm" class="w-full mb-6 ml-30" />

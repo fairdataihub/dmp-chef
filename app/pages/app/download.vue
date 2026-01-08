@@ -154,8 +154,18 @@ const items = ref([
     <div class="mx-auto flex w-full max-w-screen-xl flex-col gap-6 px-6 pt-6">
       <!-- Header -->
       <h1 class="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-6 mt-6">
-        Draft DMP 
+        Test DMP Chef 
       </h1>
+      <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-900 border border-amber-200 dark:border-amber-800 flex items-start space-x-3">
+      <UIcon name="i-heroicons-exclamation-triangle-20-solid" class="w-5 h-5 flex-shrink-0 text-amber-500 dark:text-amber-300" />
+      <div>
+        <h3 class="text-sm font-medium text-amber-800 dark:text-amber-100">
+          This page is meant only for testing and validating the DMP Chef Python pipeline. 
+      Ultimately, the DMP Chef pipeline will be integrated in DMPTool.org to provide researchers with a 
+      familiar and convenient user interface that does not require any coding knowledge.
+      </h3>
+      </div>
+    </div>
       <UTimeline orientation="horizontal" :default-value="2" :items="items" size="sm" class="w-full mb-6 ml-30" />
       <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 dark:bg-gray-800 dark:border-gray-700">
         <span class="inline-block bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded mb-3 uppercase tracking-wide dark:bg-indigo-500">

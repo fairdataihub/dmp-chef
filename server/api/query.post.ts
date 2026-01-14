@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   // 1. Log the body to your terminal to ensure it isn't empty
   console.log('Body being sent to Flask:', body)
 
-  const flaskUrl = 'http://100.81.132.45:40925/query'
+  const flaskUrl = 'https://dev.dmpchef.org/api/query'
 
   try {
     // 2. Use a direct fetch. 

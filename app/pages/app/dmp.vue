@@ -104,7 +104,7 @@ async function generateDMP() {
 
   try {
     // ======== REAL API CALL ========
-    const res = await $fetch('/api/query', {
+    const res = await $fetch('https://dev.dmpchef.org/api/query', {
       method: 'POST',
       body: payload,
     });

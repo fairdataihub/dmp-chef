@@ -1,25 +1,44 @@
-import { readBody } from 'h3'
+import { readBody, createError } from 'h3'
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event) // get posted JSON from browser
+  const rawBody = await readBody(event)
+
+  const body = {
+    title: rawBody.title || "Untitled Project",
+    agency: rawBody.agency || "Not specified",
+    projectSummary: rawBody.projectSummary || "Not provided",
+    dataType: rawBody.dataType || "Not specified",
+    dataSource: rawBody.dataSource || "Not specified",
+    humanSubjects: rawBody.humanSubjects || "No",
+    dataSharing: rawBody.dataSharing || "Not specified",
+    dataVolume: rawBody.dataVolume || "Not specified"
+  }
+  // 1. Log the body to your terminal to ensure it isn't empty
+  console.log('Body being sent to Flask:', body)
+
+  const flaskUrl = 'http://100.81.132.45:40925/query'
 
   try {
-    // call the Flask microservice
-    const flaskUrl = process.env.FLASK_URL || 'https://generator.dmpchef.org/query'
-    const res = await $fetch(flaskUrl, {
+    // 2. Use a direct fetch. 
+    // We pass 'body' directly. Nuxt will auto-stringify it.
+    const response = await $fetch(flaskUrl, {
       method: 'POST',
-      body,
-      // If Flask requires specific headers (it doesn't by default), add them here
-      headers: { 'Content-Type': 'application/json' }
+      body: body, 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 300000 
     })
 
-    // pass Flask response straight to frontend
-    return res
+    return response
   } catch (err: any) {
-    console.error('[API Gateway] Error contacting Flask service:', err?.message ?? err)
+    // If Flask fails, we print the reason here
+    console.error('[Flask Error]:', err.data)
+
     throw createError({
-      statusCode: 502,
-      statusMessage: 'Bad Gateway: failed to contact DMSP service'
+      statusCode: err?.response?.status ?? 500,
+      statusMessage: 'Flask Validation Error',
+      data: err?.data 
     })
   }
 })

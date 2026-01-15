@@ -1,17 +1,20 @@
-import { readBody, createError } from "h3";
+import { readBody, createError, handleCors } from "h3";
 
 export default defineEventHandler(async (event) => {
-  // Handle CORS preflight
-  if (event.node.req.method === "OPTIONS") {
-    // Allow all origins for simplicity (or restrict to your frontend domain)
-    event.node.res.setHeader("Access-Control-Allow-Origin", "*");
-    event.node.res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
-    event.node.res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    event.node.res.statusCode = 200;
-    return "OK";
+  // 1. Handle CORS for all origins (*)
+  // This allows any Vercel deployment URL to access this endpoint
+  handleCors(event, {
+    origin: '*',
+    methods: ['POST', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+  });
+
+  // 2. Immediately return for browser 'preflight' requests
+  if (event.node.req.method === 'OPTIONS') {
+    return null;
   }
 
-  // Normal POST handling
+  // 3. Parse the body coming from your Vercel frontend
   const rawBody = await readBody(event);
 
   const body = {
@@ -25,30 +28,43 @@ export default defineEventHandler(async (event) => {
     dataVolume: rawBody.dataVolume || "Not specified",
   };
 
-  console.log("Body being sent to Flask:", body);
+  // Log to your Nuxt terminal (useful for debugging)
+  console.log("Forwarding request to Flask GPU:", body);
 
+  // 4. Get your Tailscale Flask URL from environment variables
+  // Example: DMP_API=http://100.x.y.z:5000
   const baseUrl = process.env.DMP_API;
+  
+  if (!baseUrl) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: "Missing DMP_API Environment Variable",
+    });
+  }
+
   const flaskUrl = `${baseUrl}/query`;
 
   try {
+    // 5. Proxy the request to the Flask server
     const response = await $fetch(flaskUrl, {
       method: "POST",
       body: body,
       headers: {
         "Content-Type": "application/json",
       },
-      timeout: 300000,
+      // GPU tasks take time, so we set a long timeout (5 minutes)
+      timeout: 300000, 
     });
 
-    // Allow browser to read the response
-    event.node.res.setHeader("Access-Control-Allow-Origin", "*");
+    // Return the Flask response back to the Vercel frontend
     return response;
+
   } catch (err: any) {
-    console.error("[Flask Error]:", err.data);
+    console.error("[Flask Error]:", err.data || err.message);
 
     throw createError({
       statusCode: err?.response?.status ?? 500,
-      statusMessage: "Flask Validation Error",
+      statusMessage: "Flask GPU Server Error",
       data: err?.data,
     });
   }

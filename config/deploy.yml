@@ -35,6 +35,7 @@ proxy:
   host: <%= ENV["KAMAL_APP_DOMAIN"] %> # Your application's domain name
   # Proxy connects to your container on port 80 by default.
   app_port: 3000 # Port your Nuxt app runs on inside the container
+  response_timeout: 300
   forward_headers: true # Forward client headers to your application
   healthcheck:
     timeout: 60 # Health check timeout in seconds

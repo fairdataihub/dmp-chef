@@ -60,6 +60,12 @@ builder:
   # args:
   #   RUBY_VERSION: <%= ENV["RBENV_VERSION"] || ENV["rvm_ruby_string"] || "#{RUBY_ENGINE}-#{RUBY_ENGINE_VERSION}" %>
 
+# This section fixes your 500/Networking error
+boot:
+  network_mode: host  # Connects the container directly to Tailscale
+  limit: 10           # Restart 10 containers at a time (standard)
+  wait: 5             # Wait 5 seconds between batches
+  
 # Inject ENV variables into all containers (secrets come from .kamal/secrets).
 # Environment variables are available to your application at runtime
 env:

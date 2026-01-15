@@ -1,6 +1,17 @@
 import { readBody, createError } from "h3";
 
 export default defineEventHandler(async (event) => {
+  // Handle CORS preflight
+  if (event.node.req.method === "OPTIONS") {
+    // Allow all origins for simplicity (or restrict to your frontend domain)
+    event.node.res.setHeader("Access-Control-Allow-Origin", "*");
+    event.node.res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
+    event.node.res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    event.node.res.statusCode = 200;
+    return "OK";
+  }
+
+  // Normal POST handling
   const rawBody = await readBody(event);
 
   const body = {
@@ -13,15 +24,13 @@ export default defineEventHandler(async (event) => {
     dataSharing: rawBody.dataSharing || "Not specified",
     dataVolume: rawBody.dataVolume || "Not specified",
   };
-  // 1. Log the body to your terminal to ensure it isn't empty
+
   console.log("Body being sent to Flask:", body);
 
   const baseUrl = process.env.DMP_API;
   const flaskUrl = `${baseUrl}/query`;
 
   try {
-    // 2. Use a direct fetch.
-    // We pass 'body' directly. Nuxt will auto-stringify it.
     const response = await $fetch(flaskUrl, {
       method: "POST",
       body: body,
@@ -31,9 +40,10 @@ export default defineEventHandler(async (event) => {
       timeout: 300000,
     });
 
+    // Allow browser to read the response
+    event.node.res.setHeader("Access-Control-Allow-Origin", "*");
     return response;
   } catch (err: any) {
-    // If Flask fails, we print the reason here
     console.error("[Flask Error]:", err.data);
 
     throw createError({

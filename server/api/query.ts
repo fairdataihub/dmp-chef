@@ -2,14 +2,11 @@ import { readBody, createError } from "h3";
 
 export default defineEventHandler(async (event) => {
   // --- 1. MANUALLY SET CORS HEADERS ---
-  // We use standard Node.js headers to guarantee they are sent.
-  // This replaces 'handleCors' which can sometimes be overridden.
   event.node.res.setHeader("Access-Control-Allow-Origin", "*");
   event.node.res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   event.node.res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   // --- 2. HANDLE PREFLIGHT (OPTIONS) ---
-  // If the file is named 'query.ts', this block will now successfully run.
   if (event.node.req.method === 'OPTIONS') {
     event.node.res.statusCode = 204;
     event.node.res.statusMessage = "No Content";
@@ -18,10 +15,9 @@ export default defineEventHandler(async (event) => {
 
   // --- 3. HANDLE THE REAL POST REQUEST ---
   try {
-    // We wrap readBody in a try/catch in case the body is empty or malformed
     const rawBody = await readBody(event);
     
-    // Prepare the clean object for Flask
+    // Clean object for Flask
     const body = {
       title: rawBody.title || "Untitled Project",
       agency: rawBody.agency || "Not specified",
@@ -33,40 +29,34 @@ export default defineEventHandler(async (event) => {
       dataVolume: rawBody.dataVolume || "Not specified",
     };
 
-    // Log to your Nuxt server terminal
     console.log("-----------------------------------------");
-    console.log("Forwarding request to Flask GPU at:", new Date().toLocaleTimeString());
-    console.log("Body:", body);
+    console.log("Forwarding Request for Job ID:", new Date().toLocaleTimeString());
     console.log("-----------------------------------------");
 
     const baseUrl = process.env.DMP_API;
     
     if (!baseUrl) {
-      console.error("ERROR: DMP_API environment variable is not set!");
       throw createError({
         statusCode: 500,
         statusMessage: "Server configuration error: Missing Flask URL",
       });
     }
 
-    // Forward to Flask via Tailscale
+    // --- KEY CHANGE: Lower timeout because we only expect a Job ID now ---
     const response = await $fetch(`${baseUrl}/query`, {
       method: "POST",
       body: body,
       headers: {
         "Content-Type": "application/json",
       },
-      // 5-minute timeout for heavy GPU processing
-      timeout: 300000, 
+      timeout: 20000, // 20 seconds is plenty to get a simple ID back
     });
 
+    // Returns { job_id: "..." }
     return response;
 
   } catch (err: any) {
     console.error("[Flask/Tailscale Error]:", err.data || err.message);
-
-    // CRITICAL: Even on error, we must ensure CORS headers are present
-    // so the frontend can actually read the error message.
     event.node.res.setHeader("Access-Control-Allow-Origin", "*");
 
     throw createError({

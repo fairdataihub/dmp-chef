@@ -87,13 +87,17 @@ const items = ref([
 
 // --- Loader State ---
 const isGenerating = ref(false)
+interface StatusResponse {
+  status: 'processing' | 'completed' | 'failed' | 'not_found';
+  result?: any;
+  error?: string;
+}
 
 async function generateDMP() {
-  // 1. Set the loading state to true (This opens the UModal)
   isGenerating.value = true;
   
   const payload = {
-    title: "Immune Response Study",
+    title: "Data Management Plan",
     agency: agency.value,
     projectSummary: projectSummary.value,
     dataType: dataType.value,
@@ -104,21 +108,40 @@ async function generateDMP() {
   };
 
   try {
-    const res = await $fetch('https://dev.dmpchef.org/api/query', {
+    const submitRes = await $fetch('https://dev.dmpchef.org/api/query', {
       method: 'POST',
       body: payload
-    })
+    }) as { job_id: string };
 
-    // If Flask returns 'data', save it and move to the next page
-    if (res && res.data) {
-      dmpStore.value = res.data 
-      isGenerating.value = false
-      navigateTo('/app/dmp1')
+    const jobId = submitRes.job_id;
+    console.log("Job submitted! ID:", jobId);
+
+    // --- PART B: POLL FOR RESULTS ---
+    let isDone = false;
+    while (!isDone) {
+      // Wait 60 seconds before checking
+      await new Promise(resolve => setTimeout(resolve, 60000));
+
+      console.log("Checking GPU status...");
+      const statusRes = await $fetch<StatusResponse>(`https://dev.dmpchef.org/api/status?id=${jobId}`);
+
+      if (statusRes.status === 'completed') {
+        // SUCCESS! 
+        dmpStore.value = statusRes.result;
+        isGenerating.value = false;
+        isDone = true;
+        navigateTo('/app/dmp1');
+      } 
+      else if (statusRes.status === 'failed') {
+        throw new Error("The GPU encountered an error during generation.");
+      }
+      // If status is 'processing', the loop naturally continues
     }
+
   } catch (err) {
-    console.error(err);
-    // Ensure loader is hidden on error
-    isGenerating.value = false; 
+    console.error("Generation Workflow Failed:", err);
+    isGenerating.value = false;
+    // You can add an alert here for the user
   }
 }
 </script>
